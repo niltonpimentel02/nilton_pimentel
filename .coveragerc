@@ -6,11 +6,13 @@ omit =
     */settings.py
     */manage.py
     */wsgi.py
+    */asgi.py
     */apps.py
     */urls.py
     */admin.py
     */migrations/*
     */tests/*
     */venv/*
+    */.venv/*
     */models.py
     */tests.py
