@@ -8,10 +8,12 @@ from ..forms import ContactForm
 def response(client):
     return client.get(reverse('core:contact'))
 
+
 def test_form_has_5_fields(response):
     form = ContactForm()
     expected = 5
     assert expected == len(form.fields)
+
 
 def test_form_has_fields(client):
     response = client.get(reverse('core:contact'))
