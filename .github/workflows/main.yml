@@ -61,7 +61,7 @@ jobs:
           port: ${{ secrets.HOST_PORT }}
           shell: 'script -q -e -c "bash {0}"'
           script: |
-            cd /opt/nilton_pimentel
+            cd opt/nilton_pimentel
             git pull
             docker pull niltonpimentel/niltonpimentel:latest
             docker compose up -d --force-recreate web certbot_ssl nginx
