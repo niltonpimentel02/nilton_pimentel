@@ -55,7 +55,7 @@ services:
         - /opt/ssl/conf:/etc/nginx/ssl
         - /opt/ssl/data:/var/www/certbot
 
-  networks:
-    niltonpimentel-nt:
-      external:
-        name: niltonpimentel-nt
+networks:
+  niltonpimentel-nt:
+    external:
+      name: niltonpimentel-nt
