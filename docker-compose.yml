@@ -46,7 +46,7 @@ services:
       - /opt/ssl/conf:/etc/nginx/ssl
       - /opt/ssl/data:/var/www/certbot
       - /opt/letsencrypt_www:/var/www/letsencrypt
-      - nginx:/etc/nginx
+      - ./nginx:/etc/nginx
     networks:
       - niltonpimentel-nt
 
