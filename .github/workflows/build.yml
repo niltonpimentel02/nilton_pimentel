@@ -45,6 +45,10 @@ jobs:
           shell: 'script -q -e -c "bash {0}"'
           script: |
             cd opt/nilton_pimentel
+            touch laranjadaenv
+            cat << EOF >> .laranjadaenv
+            host_laranjada=${{ secrets.HOST_MAIN_IP }}
+            EOF
             git pull
             docker pull niltonpimentel/niltonpimentel:latest
             docker compose up -d --force-recreate web
