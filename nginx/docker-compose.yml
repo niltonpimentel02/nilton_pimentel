@@ -1,7 +1,9 @@
 services:
   nginx:
     container_name: niltonpimentel_nginx
-    image: nginx:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     ports:
       - "80:80"
