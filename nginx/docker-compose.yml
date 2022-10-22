@@ -3,8 +3,6 @@ services:
     container_name: niltonpimentel_nginx
     image: nginx:latest
     restart: always
-    depends_on:
-      - web
     ports:
       - "80:80"
       - "443:443"
