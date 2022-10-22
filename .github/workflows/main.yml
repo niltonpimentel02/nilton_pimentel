@@ -65,5 +65,5 @@ jobs:
             git pull
             docker pull niltonpimentel/niltonpimentel:latest
             docker compose up -d --force-recreate web certbot_ssl nginx
-            docker rmi $(docker images -f "dangling=true" -q)
-            truncate -s 0 /var/lib/docker/containers/*/*-json.log
+#            docker rmi $(docker images -f "dangling=true" -q)
+#            truncate -s 0 /var/lib/docker/containers/*/*-json.log
