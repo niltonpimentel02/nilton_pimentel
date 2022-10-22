@@ -3,8 +3,8 @@ name: Django CI & Postgres Test
 on:
   workflow_call:
   workflow_dispatch:
-  push:
-    branches: [main]
+#  push:
+#    branches: [main]
   pull_request:
     branches: [main]
 
@@ -16,7 +16,8 @@ jobs:
         working-directory: .
     env:
       ENV_ALLOWED_HOST: 127.0.0.1
-      DJANGO_SECRET_KEY: test-key-not-good-maybe-make-one-better
+#      DJANGO_SECRET_KEY: test-key-not-good-maybe-make-one-better
+      SECRET_KEY: test-key-not-good-maybe-make-one-better
       DB_NAME: dockerdc
       DB_USER: myuser
       DB_PASSWORD: mysecretpassword
