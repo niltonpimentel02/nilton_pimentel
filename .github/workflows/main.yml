@@ -64,6 +64,8 @@ jobs:
             cd opt/nilton_pimentel
             git pull
             docker pull niltonpimentel/niltonpimentel:latest
-            docker compose up -d --force-recreate web certbot_ssl nginx
+            docker compose up -d --force-recreate web
+            cd nginx
+            docker compose up -d --force-recreate
 #            docker rmi $(docker images -f "dangling=true" -q)
 #            truncate -s 0 /var/lib/docker/containers/*/*-json.log
