@@ -1,8 +1,10 @@
 import pytest
+from django.test.utils import ignore_warnings
 from django.urls import reverse
 
 from ..forms import ContactForm
 
+ignore_warnings(message="No directory at", module="whitenoise.base").enable()
 
 @pytest.fixture
 def response(client):
