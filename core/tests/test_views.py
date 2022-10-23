@@ -1,8 +1,6 @@
 from django.core import mail
-from django.test.utils import ignore_warnings
 from django.urls import reverse
 
-ignore_warnings(message="No directory at", module="whitenoise.base").enable()
 
 def test_redirect_home_to_contact_status_code(client):
     response = client.get(reverse('core:home'))
