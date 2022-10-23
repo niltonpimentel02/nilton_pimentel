@@ -13,6 +13,9 @@ import os
 from pathlib import Path
 
 from decouple import config, Csv
+from django.test.utils import ignore_warnings
+
+ignore_warnings(message="No directory at", module="whitenoise.base").enable()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
