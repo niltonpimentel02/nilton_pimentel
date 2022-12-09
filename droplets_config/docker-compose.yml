@@ -11,11 +11,8 @@ services:
     restart: always
     ports:
       - '80:80'
-      - '443:443'
     volumes:
-      - ./conf/:/etc/nginx/conf.d/:ro
-      - ./certbot/www:/var/www/certbot/:ro
-      - ./certbot/conf/:/etc/nginx/ssl/:ro
+      - ./nginx_config/:/etc/nginx/conf.d/:ro
     networks:
       - niltonpimentel-backend
 
@@ -37,7 +34,7 @@ services:
       - niltonpimentel-backend
 
   app:
-    container_name: niltonpimentel_django
+    container_name: niltonpimentel_app
     image: niltonpimentel/niltonpimentel:latest
     restart: always
     env_file: .env
