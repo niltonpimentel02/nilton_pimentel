@@ -12,7 +12,7 @@ jobs:
   test_django_job:
     name: Test Django
 #    uses: niltonpimentel02/nilton_pimentel/.github/workflows/test.yml@main
-    uses: niltonpimentel02/nilton_pimentel/.github/workflows/test.yaml@feature/sc-9130
+    uses: niltonpimentel02/nilton_pimentel/.github/workflows/test.yml@feature/sc-9130
 
   build:
     name: Push Docker Image To Docker Hub
