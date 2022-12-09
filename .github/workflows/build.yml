@@ -58,9 +58,9 @@ jobs:
       - name: Checkout
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.DO_HOST_IP }}
-          username: ${{ secrets.DO_HOST_USER }}
-          key: ${{ secrets.DO_HOST_PRIVATE_KEY }}
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
             cd /opt/nilton_pimentel
             rm .env
