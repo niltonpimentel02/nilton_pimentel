@@ -34,42 +34,17 @@ jobs:
           tags: |
             niltonpimentel/niltonpimentel:latest
 
-#  deploy-server:
-#    name: Build Server
-#    runs-on: ubuntu-latest
-#    needs: build
-#    steps:
-#      - uses: actions/checkout@v2
-#      - name: checkout
-#        uses: appleboy/ssh-action@master
-#        with:
-#          host: ${{ secrets.HOST_MAIN_IP }}
-#          username: ${{ secrets.HOST_USER }}
-#          key: ${{ secrets.HOST_MAIN_PRIVATE_KEY }}
-#          port: ${{ secrets.HOST_PORT }}
-#          shell: 'script -q -e -c "bash {0}"'
-#          script: |
-#            cd opt/nilton_pimentel
-#            cat << EOF >> .env
-#            SECRET_KEY=${{ secrets.SECRET_KEY }}
-#            DEBUG=${{ secrets.DEBUG }}
-#            ALLOWED_HOSTS=${{ secrets.ALLOWED_HOSTS }}
-#            DB_NAME=${{ secrets.DB_NAME }}
-#            DB_USER=${{ secrets.DB_USER }}
-#            DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-#            DB_HOST=${{ secrets.DB_HOST }}
-#            DB_PORT=${{ secrets.DB_PORT }}
-#            EMAIL_BACKEND=${{ secrets.EMAIL_BACKEND }}
-#            EMAIL_HOST=${{ secrets.EMAIL_HOST }}
-#            EMAIL_PORT=${{ secrets.EMAIL_PORT }}
-#            EMAIL_USE_TLS=${{ secrets.EMAIL_USE_TLS }}
-#            EMAIL_HOST_USER=${{ secrets.EMAIL_HOST_USER }}
-#            EMAIL_HOST_PASSWORD=${{ secrets.EMAIL_HOST_PASSWORD }}
-#            EOF
-#            git pull
-#            docker pull niltonpimentel/niltonpimentel:latest
-#            docker compose up -d --force-recreate web
-#            docker exec -it niltonpimentel_django python manage.py migrate
-#            docker exec -it niltonpimentel_django python manage.py collectstatic --no-input
-#            cd nginx
-#            docker compose up -d --force-recreate
+  copy-config-files:
+    name: Copy Config Files
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+    - uses: actions/checkout@v3
+    - name: Checkout
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST_IP }}
+        username: ${{ secrets.HOST_USERNAME }}
+        key: ${{ secrets.HOST_PRIVATE_KEY }}
+        source: 'droplets_config/*'
+        target: '/opt/nilton_pimentel'
