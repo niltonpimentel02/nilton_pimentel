@@ -2,14 +2,15 @@ FROM python:3.10.0-slim
 
 MAINTAINER Nilton Pimentel <contato@niltonpimentel.com.br>
 
-RUN apt-get update -y
-RUN pip3 install --upgrade pip
+COPY . /app
+WORKDIR /app
 
-ADD . /opt
+RUN apt update -y && apt upgrade -y && apt autoremove -y
 
-RUN pip install -r /opt/requirements.txt -U
+RUN python3 -m venv /opt/.venv --upgrade-deps
 
-ENV PYTHONPATH $PYTHONPATH:/opt
-WORKDIR /opt
+RUN /opt/.venv/bin/pip install pip install wheel && \
+    /opt/.venv/bin/pip install pip --upgrade && \
+    /opt/.venv/bin/pip install --no-cache-dir -r requirements-dev.txt
 
-EXPOSE 8900
+EXPOSE 8000
