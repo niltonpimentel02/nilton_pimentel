@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 
 networks:
   niltonpimentel-backend:
@@ -10,8 +10,8 @@ services:
     image: nginx:latest
     restart: always
     ports:
-      - "80:80"
-      - "443:443"
+      - '80:80'
+      - '443:443'
     volumes:
       - ./conf/:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
@@ -29,7 +29,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     ports:
-      - "5434:5432"
+      - '5434:5432'
     volumes:
       - ./.pgdata:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
@@ -43,7 +43,7 @@ services:
     env_file: .env
     command: gunicorn nilton_pimentel.wsgi:application -w 2 -b :8000 --threads 1 --timeout 80
     expose:
-      - "8000"
+      - '8000'
     volumes:
       - /etc/localtime:/etc/localtime:ro
     networks:
