@@ -15,6 +15,7 @@ services:
     volumes:
       - ./nginx_config/:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
       - niltonpimentel-backend
@@ -59,5 +60,7 @@ services:
     image: certbot/certbot:latest
     volumes:
       - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - niltonpimentel-backend
