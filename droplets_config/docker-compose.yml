@@ -6,7 +6,7 @@ networks:
 services:
 
   webserver:
-    container_name: nginx
+    container_name: niltonpimentel_nginx
     image: nginx:latest
     restart: always
     ports:
