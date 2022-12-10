@@ -11,8 +11,10 @@ services:
     restart: always
     ports:
       - '80:80'
+      - '443:443'
     volumes:
       - ./nginx_config/:/etc/nginx/conf.d/:ro
+      - ./certbot/www:/var/www/certbot/:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
       - niltonpimentel-backend
@@ -52,3 +54,10 @@ services:
       - niltonpimentel-backend
     depends_on:
       - postgres
+
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+    networks:
+      - niltonpimentel-backend
