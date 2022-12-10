@@ -13,6 +13,7 @@ services:
       - '80:80'
     volumes:
       - ./nginx_config/:/etc/nginx/conf.d/:ro
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - niltonpimentel-backend
 
