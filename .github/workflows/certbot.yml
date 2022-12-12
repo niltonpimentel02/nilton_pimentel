@@ -1,0 +1,22 @@
+name: Certbot Renew
+
+on:
+  schedule:
+    - cron: "15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  certbot-renew:
+    name: Certbot Renew
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Checkout
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.HOST_PRIVATE_KEY }}
+          script: |
+            cd /opt/nginx
+            docker compose run --rm certbot renew

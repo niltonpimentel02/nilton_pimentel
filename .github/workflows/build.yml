@@ -3,16 +3,13 @@ name: Build Docker Container & Push To Docker Hub
 on:
   workflow_call:
   workflow_dispatch:
-  pull_request:
+  push:
     branches: [main]
-#  push:
-#    branches: [main]
 
 jobs:
   test_django_job:
     name: Test Django
-#    uses: niltonpimentel02/nilton_pimentel/.github/workflows/test.yml@main
-    uses: niltonpimentel02/nilton_pimentel/.github/workflows/test.yml@feature/sc-9130
+    uses: niltonpimentel02/nilton_pimentel/.github/workflows/test.yml@main
 
   build:
     name: Push Docker Image To Docker Hub
