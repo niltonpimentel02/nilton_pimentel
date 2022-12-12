@@ -2,7 +2,7 @@ name: Certbot Renew
 
 on:
   schedule:
-    - cron: "15 * * * *"
+    - cron: "30 * * * *"
   workflow_dispatch:
 
 jobs:
@@ -18,5 +18,5 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
-            cd /opt/nginx
+            cd /opt/nilton_pimentel
             docker compose run --rm certbot renew
