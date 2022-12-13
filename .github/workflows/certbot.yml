@@ -2,7 +2,7 @@ name: Certbot Renew
 
 on:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "0 0 10 */2 *"
   workflow_dispatch:
 
 jobs:
@@ -13,6 +13,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: Checkout
         uses: appleboy/ssh-action@master
+        id: testing
         with:
           host: ${{ secrets.HOST_IP }}
           username: ${{ secrets.HOST_USERNAME }}
@@ -20,3 +21,8 @@ jobs:
           script: |
             cd /opt/nilton_pimentel
             docker compose run --rm certbot renew
+
+      - if: steps.testing.outputs.exitcode != '0'
+        run: |
+          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo $GITHUB_OUTPUT
