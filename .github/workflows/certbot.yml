@@ -22,7 +22,8 @@ jobs:
             cd /opt/nilton_pimentel
             docker compose run --rm certbot renew
 
-      - if: steps.testing.outputs.exitcode != '0'
+      - name: Job Successful Feedback
+        if: ${{ success() }}
         run: |
-          echo "### Hello world! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "### Successfully published to Deploy Now :white_check_mark: :rocket:" >> $GITHUB_STEP_SUMMARY
           echo $GITHUB_OUTPUT
