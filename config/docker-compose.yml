@@ -1,0 +1,66 @@
+version: '3.9'
+
+networks:
+  niltonpimentel-backend:
+
+services:
+
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    restart: always
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx_config/:/etc/nginx/conf.d/:ro
+#      - ./certbot/www:/var/www/certbot/:ro
+#      - ./certbot/conf/:/etc/nginx/ssl/:ro
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - niltonpimentel-backend
+
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    expose:
+      - '5432'
+    volumes:
+      - ./.pgdata:/var/lib/postgresql/data
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - niltonpimentel-backend
+
+  app:
+    container_name: app
+    image: niltonpimentel/niltonpimentel:latest
+    restart: always
+    env_file: .env
+    command:
+      - /bin/sh
+      - -c
+      - |
+        /opt/.venv/bin/gunicorn nilton_pimentel.wsgi:application -w 2 -b :8000 --threads 1 --timeout 80
+    expose:
+      - '8000'
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - niltonpimentel-backend
+    depends_on:
+      - postgres
+
+#  certbot:
+#    image: certbot/certbot:latest
+#    volumes:
+#      - ./certbot/www/:/var/www/certbot/:rw
+#      - ./certbot/conf/:/etc/letsencrypt/:rw
+#      - /etc/localtime:/etc/localtime:ro
+#    networks:
+#      - niltonpimentel-backend

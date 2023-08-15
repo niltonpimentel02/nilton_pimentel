@@ -43,8 +43,8 @@ jobs:
         host: ${{ secrets.HOST_IP }}
         username: ${{ secrets.HOST_USERNAME }}
         key: ${{ secrets.HOST_PRIVATE_KEY }}
-        source: 'droplets_config/*'
-        target: '/opt/nilton_pimentel'
+        source: 'config/*'
+        target: '/opt/projects/nilton_pimentel'
 
   deploy-server:
     name: Deploy Server
@@ -59,7 +59,7 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
-            cd /opt/nilton_pimentel
+            cd /opt/projects/nilton_pimentel
             rm .env
             cat << EOF >> .env
             SECRET_KEY=${{ secrets.SECRET_KEY }}
@@ -91,11 +91,11 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
-            cd /opt/nilton_pimentel
+            cd /opt/projects/nilton_pimentel
             docker pull niltonpimentel/niltonpimentel:latest
-            cp droplets_config/docker-compose.yml docker-compose.yml
-            cp droplets_config/nginx.conf nginx_config/nginx.conf
-            docker compose up -d --force-recreate webserver app
+            cp config/docker-compose.yml docker-compose.yml
+            cp config/nginx.conf nginx_config/nginx.conf
+            docker compose up -d --force-recreate nginx app
 
   apply-django-data:
     name: Apply Django Data
@@ -110,6 +110,6 @@ jobs:
           username: ${{ secrets.HOST_USERNAME }}
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
-            cd /opt/nilton_pimentel
+            cd /opt/projects/nilton_pimentel
             docker exec --tty niltonpimentel_app /opt/.venv/bin/python manage.py migrate --noinput
             docker exec --tty niltonpimentel_app /opt/.venv/bin/python manage.py collectstatic --no-input
