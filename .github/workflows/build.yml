@@ -94,7 +94,6 @@ jobs:
             cd /opt/projects/nilton_pimentel
             docker pull niltonpimentel/niltonpimentel:latest
             cp config/docker-compose.yml docker-compose.yml
-            cp config/nginx.conf nginx_config/nginx.conf
             docker compose up -d --force-recreate nginx app
 
   apply-django-data:
