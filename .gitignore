@@ -105,9 +105,10 @@ venv.bak/
 dmypy.json
 # Pyre type checker
 .pyre/
-
 # Media & Static files
 staticfiles/
 mediafiles/
-
+# Postgres
 .pgdata/
+# Docker
+docker-compose-local.yml
