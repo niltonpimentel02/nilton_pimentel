@@ -111,5 +111,5 @@ jobs:
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
             cd /opt/projects/nilton_pimentel
-            docker exec --tty niltonpimentel_app /opt/.venv/bin/python manage.py migrate --noinput
-            docker exec --tty niltonpimentel_app /opt/.venv/bin/python manage.py collectstatic --no-input
+            docker exec --tty app /opt/.venv/bin/python manage.py migrate --noinput
+            docker exec --tty app /opt/.venv/bin/python manage.py collectstatic --no-input

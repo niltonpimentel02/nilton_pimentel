@@ -13,7 +13,8 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - ./nginx_config/:/etc/nginx/conf.d/:ro
+      - ./config/:/etc/nginx/conf.d/:ro
+#      - ./nginx_config/:/etc/nginx/conf.d/:ro
 #      - ./certbot/www:/var/www/certbot/:ro
 #      - ./certbot/conf/:/etc/nginx/ssl/:ro
       - /etc/localtime:/etc/localtime:ro
