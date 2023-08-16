@@ -1,16 +1,23 @@
-FROM python:3.10.0-slim
+FROM python:3.11-slim
 
-MAINTAINER Nilton Pimentel <contato@niltonpimentel.com.br>
+LABEL maintainer="Nilton Pimentel <contato@niltonpimentel.com.br>"
 
-COPY . /app
+# Set working directory
 WORKDIR /app
 
-RUN apt update -y && apt upgrade -y && apt autoremove -y
+# Copy source code to container
+COPY . .
 
-RUN python3 -m venv /opt/.venv --upgrade-deps
+# Install system dependencies and clean up
+RUN apt update -y && \
+    apt upgrade -y && \
+    apt autoremove -y && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN /opt/.venv/bin/pip install pip install wheel && \
-    /opt/.venv/bin/pip install pip --upgrade && \
-    /opt/.venv/bin/pip install --no-cache-dir -r requirements-dev.txt
+# Install Python dependencies
+RUN pip install wheel && \
+    pip install --upgrade pip && \
+    pip install --no-cache-dir -r requirements-dev.txt
 
 EXPOSE 8000
