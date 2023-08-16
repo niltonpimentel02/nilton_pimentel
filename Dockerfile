@@ -10,8 +10,15 @@ ENV PYTHONUNBUFFERED 1
 # Set working directory
 WORKDIR /app
 
+# Create a new user 'appuser' without a home directory and switch to it
+RUN useradd appuser && chown -R appuser /app
+USER appuser
+
 # Copy source code to container
 COPY . .
+
+# Switch back to root to install system and Python dependencies
+USER root
 
 # Install system dependencies and clean up
 RUN apt update -y && \
@@ -24,5 +31,8 @@ RUN apt update -y && \
 RUN pip install wheel && \
     pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements-dev.txt
+
+# Switch back to appuser
+USER appuser
 
 EXPOSE 8000
