@@ -2,6 +2,11 @@ FROM python:3.11-slim
 
 LABEL maintainer="Nilton Pimentel <contato@niltonpimentel.com.br>"
 
+# Environment variables to prevent Python from writing pyc files to disc
+# and to ensure unbuffered mode for better logging
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
+
 # Set working directory
 WORKDIR /app
 
