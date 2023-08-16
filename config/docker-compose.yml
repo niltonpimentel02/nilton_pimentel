@@ -43,7 +43,7 @@ services:
       - /bin/sh
       - -c
       - |
-        /opt/.venv/bin/gunicorn nilton_pimentel.wsgi:application -w 2 -b :8000 --threads 1 --timeout 80
+        gunicorn nilton_pimentel.wsgi:application -w 2 -b :8000 --threads 1 --timeout 80
     expose:
       - '8000'
     volumes:
