@@ -19,9 +19,8 @@ jobs:
       EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
       EMAIL_HOST: smtp.server.com
       EMAIL_PORT: 587
-      EMAIL_USE_TLS: True
-      EMAIL_HOST_USER: myuser
-      EMAIL_HOST_PASSWORD: mysecretpassword
+      EMAIL_USER: myuser
+      EMAIL_PASSWORD: mysecretpassword
       DB_NAME: dockerdc
       DB_USER: myuser
       DB_PASSWORD: mysecretpassword
