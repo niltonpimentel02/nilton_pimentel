@@ -30,7 +30,7 @@ RUN apt update -y && \
 # Install Python dependencies
 RUN pip install wheel && \
     pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements-dev.txt
+    pip install --no-cache-dir -r requirements.txt
 
 # Switch back to appuser
 USER appuser
