@@ -12,7 +12,7 @@ class ContactView(FormView):
 
     def form_valid(self, form):
         form.send_mail()
-        messages.success(self.request, 'Email sent successfully!')
+        messages.success(self.request, 'E-mail enviado com sucesso!')
         return super().form_valid(form)
 
     def form_invalid(self, form):

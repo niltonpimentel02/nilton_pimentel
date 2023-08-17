@@ -40,8 +40,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core',
 ]
+
+EXTRA_APPS = []
+
+PROJECT_APPS = ['core']
+
+DEV_APPS = ['django_extensions']
+
+INSTALLED_APPS += EXTRA_APPS + PROJECT_APPS + DEV_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
