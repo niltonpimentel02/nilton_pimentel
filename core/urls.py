@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .views import contact, home
+from core.views import ContactView, home
 
 app_name = 'core'
 
 urlpatterns = [
-    path('contato/', contact, name='contact'),
+    path('contato/', ContactView.as_view(), name='contact'),
     path('', home, name='home'),
 ]
