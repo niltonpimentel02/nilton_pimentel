@@ -1,6 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import redirect
-from django.views.generic import FormView
+from django.views.generic import FormView, RedirectView
 
 from .forms import ContactForm
 
@@ -21,5 +20,5 @@ class ContactView(FormView):
         return self.render_to_response(self.get_context_data(form=form))
 
 
-def home(request):
-    return redirect('core:contact')
+class HomeView(RedirectView):
+    url = 'contato/'
