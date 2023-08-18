@@ -171,7 +171,3 @@ if DEBUG:
         },
         "root": {"level": "INFO", "handlers": ["console"]},
     }
-
-CSRF_TRUSTED_ORIGINS = [
-    'www.niltonpimentel.com.br',
-]
