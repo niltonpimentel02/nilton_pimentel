@@ -22,7 +22,13 @@ class ContactForm(forms.Form):
         label='',
         max_length=20,
         error_messages={'required': 'Por favor, digite seu celular:'},
-        widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Celular'}),
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Celular',
+                'id': 'id_phone',
+            }
+        )
     )
     subject = forms.CharField(
         label='',
