@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-EXTRA_APPS = []
+EXTRA_APPS = ['crispy_forms', 'crispy_bootstrap5']
 
 PROJECT_APPS = ['core']
 
@@ -117,7 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
@@ -173,3 +174,7 @@ if DEBUG:
     }
 
 CSRF_TRUSTED_ORIGINS = ['https://*.niltonpimentel.com.br']
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"

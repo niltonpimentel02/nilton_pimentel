@@ -19,11 +19,13 @@ def test_mail(mailoutbox):
 
 def test_contact_form_email_from(client):
     data = dict(
-        name='Nilton Pimentel',
+        firstname='Nilton',
+        lastname='Pimentel',
         email='email@example.com',
-        phone='11111111111',
-        subject='E-mail enviado pelo site',
-        message='Testing'
+        phone='111111111111111',
+        subject='E-mail Enviado Pelo Site Testig',
+        message='Testing Testing Testing Testing Testing Testing Testing '
+                'Testing Testing Testing Testing Testing Testing Testing'
     )
     client.post(reverse('core:contact'), data)
     email = mail.outbox[0]
