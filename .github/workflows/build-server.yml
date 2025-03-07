@@ -13,11 +13,11 @@ jobs:
 
   build:
     name: Push Docker Image To Docker Hub
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: test_django_job
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Log In To Docker Hub
         uses: docker/login-action@v2
         with:
@@ -33,10 +33,10 @@ jobs:
 
   copy-config-files:
     name: Copy Config Files
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Checkout
       uses: appleboy/scp-action@master
       with:
@@ -48,10 +48,10 @@ jobs:
 
   deploy-server:
     name: Deploy Server
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: copy-config-files
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Checkout
         uses: appleboy/ssh-action@master
         with:
@@ -79,10 +79,10 @@ jobs:
 
   restart-docker-containers:
     name: Restart Docker Containers
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: deploy-server
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Checkout
         uses: appleboy/ssh-action@master
         with:
@@ -97,10 +97,10 @@ jobs:
 
   apply-django-data:
     name: Apply Django Data
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: restart-docker-containers
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Checkout
         uses: appleboy/ssh-action@master
         with:
