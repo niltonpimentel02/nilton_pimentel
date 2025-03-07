@@ -34,7 +34,7 @@ jobs:
   copy-config-files:
     name: Copy Config Files
     runs-on: ubuntu-24.04
-    needs: build
+    needs: test_django_job
     steps:
     - uses: actions/checkout@v4
     - name: Checkout
@@ -49,7 +49,7 @@ jobs:
   deploy-server:
     name: Deploy Server
     runs-on: ubuntu-24.04
-    needs: copy-config-files
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - name: Checkout
@@ -65,11 +65,13 @@ jobs:
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             DEBUG=${{ secrets.DEBUG }}
             ALLOWED_HOSTS=${{ vars.ALLOWED_HOSTS }}
+
             DB_NAME=${{ secrets.DB_NAME }}
             DB_USER=${{ secrets.DB_USER }}
             DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             DB_HOST=${{ secrets.DB_HOST }}
             DB_PORT=${{ secrets.DB_PORT }}
+
             EMAIL_BACKEND=${{ secrets.EMAIL_BACKEND }}
             EMAIL_HOST=${{ secrets.EMAIL_HOST }}
             EMAIL_PORT=${{ secrets.EMAIL_PORT }}
