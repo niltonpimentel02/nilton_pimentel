@@ -158,23 +158,23 @@ EMAIL_PASSWORD = config('EMAIL_PASSWORD')
 
 if DEBUG:
     LOGGING = {
-        "version": 1,
-        "disable_existing_loggers": False,
-        "formatters": {
-            "verbose": {"format": "%(levelname)s %(asctime)s %(module)s " "%(process)d %(thread)d %(message)s"}
+        'version': 1,
+        'disable_existing_loggers': False,
+        'formatters': {
+            'verbose': {'format': '%(levelname)s %(asctime)s %(module)s ' '%(process)d %(thread)d %(message)s'}
         },
-        "handlers": {
-            "console": {
-                "level": "DEBUG",
-                "class": "logging.StreamHandler",
-                "formatter": "verbose",
+        'handlers': {
+            'console': {
+                'level': 'DEBUG',
+                'class': 'logging.StreamHandler',
+                'formatter': 'verbose',
             }
         },
-        "root": {"level": "INFO", "handlers": ["console"]},
+        'root': {'level': 'INFO', 'handlers': ['console']},
     }
 
 CSRF_TRUSTED_ORIGINS = ['https://*.niltonpimentel.com.br']
 
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 
-CRISPY_TEMPLATE_PACK = "bootstrap5"
+CRISPY_TEMPLATE_PACK = 'bootstrap5'

@@ -8,5 +8,5 @@ ipython==9.0.2
 pytest==8.3.5
 pytest-cov==6.0.0
 pytest-django==4.10.0
-crispy-bootstrap5==0.7
-django-crispy-forms==2.0
+crispy-bootstrap5==2024.10
+django-crispy-forms==2.3
