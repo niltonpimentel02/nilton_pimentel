@@ -14,7 +14,7 @@ jobs:
       run:
         working-directory: .
     env:
-#      DEBUG: False
+      DEBUG: False
       SECRET_KEY: test-key-not-good-maybe-make-one-better
       ALLOWED_HOSTS: 127.0.0.1
 
