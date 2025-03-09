@@ -14,6 +14,8 @@ from pathlib import Path
 
 from decouple import config, Csv
 
+from helpers.cloudflare.settings import CLOUDFLARE_R2_CONFIG_OPTIONS
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -138,8 +140,22 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
-WHITENOISE_AUTOREFRESH = True
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+# WHITENOISE_AUTOREFRESH = True
+
+# Introduced in Django 4.2
+STORAGES = {
+    'default': {
+        # 'BACKEND': 'storages.backends.s3.S3Storage',
+        'BACKEND': 'helpers.cloudflare.storages.MediaFileStorage',
+        'OPTIONS': CLOUDFLARE_R2_CONFIG_OPTIONS,
+    },
+    'staticfiles': {
+        # 'BACKEND': 'storages.backends.s3.S3Storage',
+        'BACKEND': 'helpers.cloudflare.storages.StaticFileStorage',
+        'OPTIONS': CLOUDFLARE_R2_CONFIG_OPTIONS,
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

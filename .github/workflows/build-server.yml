@@ -72,6 +72,11 @@ jobs:
             DB_HOST=${{ secrets.DB_HOST }}
             DB_PORT=${{ secrets.DB_PORT }}
 
+            CLOUDFLARE_R2_BUCKET=${{ secrets.CLOUDFLARE_R2_BUCKET}}
+            CLOUDFLARE_R2_ACCESS_KEY=${{ secrets.CLOUDFLARE_R2_ACCESS_KEY}}
+            CLOUDFLARE_R2_SECRET_KEY=${{ secrets.CLOUDFLARE_R2_SECRET_KEY}}
+            CLOUDFLARE_R2_BUCKET_ENDPOINT=${{ secrets.CLOUDFLARE_R2_BUCKET_ENDPOINT}}
+
             EMAIL_BACKEND=${{ secrets.EMAIL_BACKEND }}
             EMAIL_HOST=${{ secrets.EMAIL_HOST }}
             EMAIL_PORT=${{ secrets.EMAIL_PORT }}
