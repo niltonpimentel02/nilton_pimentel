@@ -11,7 +11,7 @@ jobs:
     name: Test Django
     uses: niltonpimentel02/nilton_pimentel/.github/workflows/test-django.yml@main
 
-  build:
+  push-docker-image-to-docker-hub:
     name: Push Docker Image To Docker Hub
     runs-on: ubuntu-24.04
     needs: test_django_job
@@ -49,7 +49,7 @@ jobs:
   deploy-server:
     name: Deploy Server
     runs-on: ubuntu-24.04
-    needs: build
+    needs: push-docker-image-to-docker-hub
     steps:
       - uses: actions/checkout@v4
       - name: Checkout
@@ -102,8 +102,25 @@ jobs:
             cp config/docker-compose.yml docker-compose.yml
             docker compose up -d --force-recreate nginx app
 
-  apply-django-data:
-    name: Apply Django Data
+  apply-django-migrations:
+    name: Apply Django Migrations
+    runs-on: ubuntu-24.04
+    needs: restart-docker-containers
+    if: github.event_name == 'push' && contains(github.event.commits.*.added, '**/migrations/**') && github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.HOST_PRIVATE_KEY }}
+          script: |
+            cd /opt/projects/nilton_pimentel
+            docker exec --tty app python manage.py migrate --noinput
+
+  run-django-collectstatic:
+    name: Run Django Collect Static
     runs-on: ubuntu-24.04
     needs: restart-docker-containers
     steps:
@@ -116,5 +133,4 @@ jobs:
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
             cd /opt/projects/nilton_pimentel
-            docker exec --tty app python manage.py migrate --noinput
             docker exec --tty app python manage.py collectstatic --no-input
