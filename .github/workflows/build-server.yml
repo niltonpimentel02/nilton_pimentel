@@ -7,14 +7,14 @@ on:
     branches: [main]
 
 jobs:
-  test_django_job:
+  test-django:
     name: Test Django
     uses: niltonpimentel02/nilton_pimentel/.github/workflows/test-django.yml@main
 
   push-docker-image-to-docker-hub:
     name: Push Docker Image To Docker Hub
     runs-on: ubuntu-24.04
-    needs: test_django_job
+    needs: test-django
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -34,7 +34,7 @@ jobs:
   copy-config-files:
     name: Copy Config Files
     runs-on: ubuntu-24.04
-    needs: test_django_job
+    needs: test-django
     steps:
     - uses: actions/checkout@v4
     - name: Checkout
@@ -106,7 +106,7 @@ jobs:
     name: Apply Django Migrations
     runs-on: ubuntu-24.04
     needs: restart-docker-containers
-    if: github.event_name == 'push' && contains(github.event.commits.*.added, '**/migrations/**') && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && (contains(github.event.commits.*.added, '**/migrations/**') || contains(github.event.commits.*.modified, '**/migrations/**')) && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
       - name: Checkout
