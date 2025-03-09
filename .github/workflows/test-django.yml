@@ -27,7 +27,7 @@ jobs:
 
       CLOUDFLARE_R2_BUCKET: bucket
       CLOUDFLARE_R2_ACCESS_KEY: access-key
-#      CLOUDFLARE_R2_SECRET_KEY: secret-key
+      CLOUDFLARE_R2_SECRET_KEY: secret-key
 #      CLOUDFLARE_R2_BUCKET_ENDPOINT: endpoint
 
       EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
