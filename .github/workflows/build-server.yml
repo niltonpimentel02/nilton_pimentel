@@ -31,21 +31,6 @@ jobs:
           tags: |
             niltonpimentel/niltonpimentel:latest
 
-  copy-config-files:
-    name: Copy Config Files
-    runs-on: ubuntu-24.04
-    needs: test-django
-    steps:
-    - uses: actions/checkout@v4
-    - name: Checkout
-      uses: appleboy/scp-action@master
-      with:
-        host: ${{ secrets.HOST_IP }}
-        username: ${{ secrets.HOST_USERNAME }}
-        key: ${{ secrets.HOST_PRIVATE_KEY }}
-        source: 'config/*'
-        target: '/opt/projects/nilton_pimentel'
-
   create-env-file:
     name: Create Env File
     runs-on: ubuntu-24.04
@@ -83,6 +68,21 @@ jobs:
             EMAIL_USER=${{ secrets.EMAIL_USER }}
             EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
             EOF
+
+  copy-config-files:
+    name: Copy Config Files
+    runs-on: ubuntu-24.04
+    needs: test-django
+    steps:
+    - uses: actions/checkout@v4
+    - name: Checkout
+      uses: appleboy/scp-action@master
+      with:
+        host: ${{ secrets.HOST_IP }}
+        username: ${{ secrets.HOST_USERNAME }}
+        key: ${{ secrets.HOST_PRIVATE_KEY }}
+        source: 'config/*'
+        target: '/opt/projects/nilton_pimentel'
 
   restart-docker-containers:
     name: Restart Docker Containers
