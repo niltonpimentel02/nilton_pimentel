@@ -14,7 +14,7 @@ jobs:
       run:
         working-directory: .
     env:
-      DEBUG: False
+#      DEBUG: False
       SECRET_KEY: test-key-not-good-maybe-make-one-better
       ALLOWED_HOSTS: 127.0.0.1
 
@@ -25,10 +25,10 @@ jobs:
       DB_PORT: 5432
       DB_TEST: test_mydb
 
-      CLOUDFLARE_R2_BUCKET: bucket
-      CLOUDFLARE_R2_ACCESS_KEY: access-key
-      CLOUDFLARE_R2_SECRET_KEY: secret-key
-      CLOUDFLARE_R2_BUCKET_ENDPOINT: endpoint
+#      CLOUDFLARE_R2_BUCKET: bucket
+#      CLOUDFLARE_R2_ACCESS_KEY: access-key
+#      CLOUDFLARE_R2_SECRET_KEY: secret-key
+#      CLOUDFLARE_R2_BUCKET_ENDPOINT: endpoint
 
       EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
       EMAIL_HOST: smtp.server.com
