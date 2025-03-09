@@ -46,10 +46,10 @@ jobs:
         source: 'config/*'
         target: '/opt/projects/nilton_pimentel'
 
-  deploy-server:
-    name: Deploy Server
+  create-env-file:
+    name: Create Env File
     runs-on: ubuntu-24.04
-    needs: push-docker-image-to-docker-hub
+    needs: test-django
     steps:
       - uses: actions/checkout@v4
       - name: Checkout
@@ -87,7 +87,7 @@ jobs:
   restart-docker-containers:
     name: Restart Docker Containers
     runs-on: ubuntu-24.04
-    needs: deploy-server
+    needs: [push-docker-image-to-docker-hub, create-env-file]
     steps:
       - uses: actions/checkout@v4
       - name: Checkout
