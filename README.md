@@ -24,3 +24,7 @@ pip install -r requirements.txt
 cp contrib/env-sample .env
 pytest
 ```
+
+````
+test semantic-pull-request
+````
