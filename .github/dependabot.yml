@@ -5,15 +5,16 @@
 
 version: 2
 updates:
-  - package-ecosystem: "github-actions" # See documentation for possible values
+  - package-ecosystem: "github-actions"
     assignees:
       - "niltonpimentel02"
     commit-message:
       prefix: "[github-actions] "
-    directory: "/" # Location of package manifests
+    directory: "/"
     labels:
       - "dependabot"
-    reviewers:
-      - "niltonpimentel02"
     schedule:
-      interval: "daily"
+      interval: "weekly"
+      day: "monday"
+      time: "12:00"
+      timezone: "America/Sao_Paulo"
