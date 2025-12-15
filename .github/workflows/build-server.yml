@@ -10,7 +10,6 @@ jobs:
   push-docker-image-to-docker-hub:
     name: Push Docker Image To Docker Hub
     runs-on: ubuntu-24.04
-    needs: test-django
     steps:
       - name: Check out the repo
         uses: actions/checkout@v6
@@ -30,7 +29,6 @@ jobs:
   create-env-file:
     name: Create Env File
     runs-on: ubuntu-24.04
-    needs: test-django
     steps:
       - uses: actions/checkout@v6
       - name: Checkout
@@ -68,7 +66,6 @@ jobs:
   copy-config-files:
     name: Copy Config Files
     runs-on: ubuntu-24.04
-    needs: test-django
     steps:
     - uses: actions/checkout@v6
     - name: Checkout
