@@ -1,7 +1,7 @@
 # Formulário de contato do meu domínio
 
 ![](https://img.shields.io/badge/Python-3.12.0-blue.svg)
-![](https://img.shields.io/badge/Django-4.2.20-blue.svg)
+![](https://img.shields.io/badge/Django-4.2.27-blue.svg)
 
 ## Aplicação disponível em:
 
@@ -25,6 +25,3 @@ cp contrib/env-sample .env
 pytest
 ```
 
-````
-test semantic-pull-request
-````
