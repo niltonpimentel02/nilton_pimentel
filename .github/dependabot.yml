@@ -31,6 +31,9 @@ updates:
       python-dependencies:
         patterns:
           - "*"
+    ignore:
+      - dependency-name: "django"
+        versions: ["5.x", "6.x"]
     labels:
       - "dependabot"
     schedule:
