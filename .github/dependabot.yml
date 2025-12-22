@@ -32,8 +32,8 @@ updates:
         patterns:
           - "*"
     ignore:
-      - dependency-name: "django"
-        versions: ["5.x", "6.x"]
+      - dependency-name: "django*"
+        versions: ["5", "6"]
     labels:
       - "dependabot"
     schedule:
