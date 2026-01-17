@@ -93,7 +93,8 @@ jobs:
             cd /opt/projects/nilton_pimentel
             docker pull niltonpimentel/niltonpimentel:latest
             cp config/docker-compose.yml docker-compose.yml
-            docker compose up -d --force-recreate nginx app
+            cp -r config/traefik traefik
+            # docker compose up -d --force-recreate nginx app
 
   apply-django-migrations:
     name: Apply Django Migrations
