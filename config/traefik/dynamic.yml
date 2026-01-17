@@ -1,0 +1,41 @@
+http:
+  routers:
+    app-https:
+      rule: "Host(`niltonpimentel.com.br`) || Host(`www.niltonpimentel.com.br`)"
+      entryPoints:
+        - websecure
+      service: app-service
+      tls: {}
+
+    traefik-dashboard:
+      rule: "Host(`traefik.niltonpimentel.com.br`)"
+      entryPoints:
+        - websecure
+      service: api@internal
+      # middlewares:
+      #   - traefik-dashboard-auth
+      tls: {}
+
+    portainer-https:
+      rule: "Host(`portainer.niltonpimentel.com.br`)"
+      entryPoints:
+        - websecure
+      service: portainer-service
+      tls: {}
+
+  services:
+    app-service:
+      loadBalancer:
+        servers:
+          - url: "http://app:8000"
+
+    portainer-service:
+      loadBalancer:
+        servers:
+          - url: "http://portainer:9000"
+
+  middlewares:
+    traefik-dashboard-auth:
+      basicAuth:
+        users:
+          - "admin:$apr1$e43WxjEw$pDLr2V0gu/yvBZbx4txGW1"

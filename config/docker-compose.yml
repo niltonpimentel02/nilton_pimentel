@@ -1,19 +1,38 @@
-version: '3.9'
-
 networks:
   niltonpimentel-backend:
 
 services:
-  nginx:
-    container_name: nginx
-    image: nginx:latest
+  traefik:
+    container_name: traefik
+    image: traefik:latest
+    restart: always
+    command:
+      - "--configFile=/etc/traefik/traefik.yml"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /etc/localtime:/etc/localtime:ro
+      - ./traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - ./traefik/dynamic.yml:/etc/traefik/dynamic.yml:ro
+    networks:
+      - niltonpimentel-backend
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "2"
+
+  portainer:
+    container_name: portainer
+    image: portainer/portainer-ce:lts
     restart: always
     ports:
-      - '80:80'
-      - '443:443'
+      - 9000:9000
     volumes:
-      - ./config/:/etc/nginx/conf.d/:ro
+      - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro
+      - ./portainer_data:/data
     networks:
       - niltonpimentel-backend
 
@@ -27,7 +46,7 @@ services:
       - POSTGRES_USER=${DB_USER}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
     expose:
-      - '5432'
+      - "5432"
     volumes:
       - ./.pgdata:/var/lib/postgresql/data
       - /etc/localtime:/etc/localtime:ro
@@ -45,7 +64,7 @@ services:
       - |
         gunicorn nilton_pimentel.wsgi:application -w 2 -b :8000 --threads 1 --timeout 80
     expose:
-      - '8000'
+      - "8000"
     volumes:
       - /etc/localtime:/etc/localtime:ro
     networks:
