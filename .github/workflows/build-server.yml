@@ -94,13 +94,12 @@ jobs:
             docker pull niltonpimentel/niltonpimentel:latest
             cp config/docker-compose.yml docker-compose.yml
             cp -r config/traefik traefik
-            # docker compose up -d --force-recreate nginx app
+            docker compose up -d --force-recreate traefik app
 
   apply-django-migrations:
     name: Apply Django Migrations
     runs-on: ubuntu-24.04
     needs: restart-docker-containers
-    if: github.event_name == 'push' && (contains(github.event.commits.*.added, '**/migrations/**') || contains(github.event.commits.*.modified, '**/migrations/**')) && github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v6
       - name: Checkout
