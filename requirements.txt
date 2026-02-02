@@ -1,7 +1,7 @@
 Django==4.2.27
 psycopg2-binary==2.9.11
 python-decouple==3.8
-gunicorn==23.0.0
+gunicorn==24.1.1
 whitenoise==6.11.0
 django-extensions==4.1
 ipython==9.9.0
