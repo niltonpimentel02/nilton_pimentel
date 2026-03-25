@@ -1,7 +1,7 @@
 # Formulário de contato do meu domínio
 
 ![](https://img.shields.io/badge/Python-3.12.0-blue.svg)
-![](https://img.shields.io/badge/Django-4.2.27-blue.svg)
+![](https://img.shields.io/badge/Django-5.2.12-blue.svg)
 
 ## Aplicação disponível em:
 

@@ -33,7 +33,7 @@ updates:
           - "*"
     ignore:
       - dependency-name: "django*"
-        versions: [">= 5.0"]
+        versions: [">= 6.0"]
     labels:
       - "dependabot"
     schedule:
