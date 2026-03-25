@@ -22,7 +22,7 @@ jobs:
       DB_USER: myuser
       DB_PASSWORD: mysecretpassword
       DB_HOST: localhost
-      DB_PORT: 5432
+      DB_PORT: 5434
       DB_TEST: test_mydb
 
       CLOUDFLARE_R2_BUCKET: bucket
@@ -52,7 +52,7 @@ jobs:
     strategy:
       max-parallel: 4
       matrix:
-        python-version: [3.12.0]
+        python-version: ["3.12"]
     steps:
       - uses: actions/checkout@v6
       - name: Set Up Python ${{ matrix.python-version }}
