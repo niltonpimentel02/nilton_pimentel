@@ -62,7 +62,7 @@ services:
       - /bin/sh
       - -c
       - |
-        gunicorn nilton_pimentel.wsgi:application -w 2 -b :8000 --threads 1 --timeout 80
+        gunicorn nilton_pimentel.wsgi:application --bind :8000 --threads 1 --timeout 80 --workers 2 
     expose:
       - "8000"
     volumes:
