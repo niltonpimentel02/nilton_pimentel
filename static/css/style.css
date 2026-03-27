@@ -1,0 +1,409 @@
+/* ============================================================
+   Nilton Pimentel — Custom Dark Theme
+   ============================================================ */
+
+/* ── Design Tokens ─────────────────────────────────────────── */
+:root {
+  --bg:          #0d0d0d;
+  --bg-alt:      #111111;
+  --surface:     #161616;
+  --surface-alt: #1c1c1c;
+  --border:      #252525;
+  --border-soft: #1e1e1e;
+  --text:        #e8e8e8;
+  --text-soft:   #c0c0c0;
+  --muted:       #666666;
+  --accent:      #A78BFA;
+  --accent-dim:  rgba(167, 139, 250, 0.10);
+  --accent-glow: rgba(167, 139, 250, 0.06);
+  --danger:      #ff5e5e;
+  --danger-dim:  rgba(255, 94, 94, 0.12);
+  --success:     #A78BFA;
+  --success-dim: rgba(167, 139, 250, 0.10);
+
+  --font-mono:   'JetBrains Mono', 'Fira Code', monospace;
+  --font-body:   'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --transition:  0.2s ease;
+}
+
+/* ── Reset / Base ───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  min-height: 100vh;
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.anim-fadein {
+  animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.anim-fadein-delay-1 {
+  animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.10s both;
+}
+
+.anim-fadein-delay-2 {
+  animation: fadeInUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.20s both;
+}
+
+/* ── Navigation ─────────────────────────────────────────────── */
+.site-nav {
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--border-soft);
+  padding: 0 2rem;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.nav-brand {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  transition: color var(--transition);
+}
+
+.nav-brand:hover {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.nav-brand .accent-dot {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition), background-color var(--transition);
+  letter-spacing: 0.01em;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+  background-color: var(--surface);
+  text-decoration: none;
+}
+
+.nav-links a svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+/* ── Page Layout ─────────────────────────────────────────────── */
+.page-wrapper {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 3.5rem 1.5rem 5rem;
+}
+
+/* ── Intro Section ───────────────────────────────────────────── */
+.intro-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.intro-name {
+  font-family: var(--font-mono);
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.04em;
+  margin: 0 0 0.6rem;
+  line-height: 1.1;
+}
+
+.intro-role {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem;
+  opacity: 0.9;
+}
+
+.intro-divider {
+  width: 36px;
+  height: 2px;
+  background: var(--accent);
+  border: none;
+  margin: 1rem auto;
+  opacity: 0.5;
+  border-radius: 2px;
+}
+
+.intro-tagline {
+  font-size: 0.92rem;
+  color: var(--muted);
+  max-width: 420px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ── Contact Section Label ───────────────────────────────────── */
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-label-text {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.section-label-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── Contact Card ────────────────────────────────────────────── */
+.contact-card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 2rem 2rem 1.75rem;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.02),
+    0 4px 40px var(--accent-glow);
+}
+
+/* ── Form Elements ───────────────────────────────────────────── */
+.contact-card .form-control,
+.contact-card .form-select {
+  background-color: var(--bg-alt);
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  padding: 0.6rem 0.85rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.contact-card .form-control::placeholder {
+  color: var(--muted);
+}
+
+.contact-card .form-control:focus,
+.contact-card .form-select:focus {
+  background-color: var(--bg-alt);
+  color: var(--text);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-dim);
+  outline: none;
+}
+
+/* Override crispy-forms label color */
+.contact-card label {
+  color: var(--text-soft);
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-bottom: 0.3rem;
+  letter-spacing: 0.01em;
+}
+
+/* Crispy forms error text */
+.contact-card .invalid-feedback,
+.contact-card .text-danger {
+  color: var(--danger) !important;
+  font-size: 0.8rem;
+}
+
+.contact-card .form-control.is-invalid {
+  border-color: var(--danger);
+  box-shadow: none;
+}
+
+.contact-card .form-control.is-invalid:focus {
+  box-shadow: 0 0 0 3px var(--danger-dim);
+}
+
+/* Textarea */
+.contact-card textarea.form-control {
+  resize: vertical;
+  min-height: 130px;
+}
+
+/* ── Submit Button ───────────────────────────────────────────── */
+.btn-submit {
+  display: block;
+  width: 100%;
+  background-color: var(--accent);
+  color: #0a0a0a;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition: filter var(--transition), transform var(--transition), box-shadow var(--transition);
+  margin-top: 0.5rem;
+}
+
+.btn-submit:hover {
+  filter: brightness(1.12);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(167, 139, 250, 0.25);
+}
+
+.btn-submit:active {
+  transform: translateY(0);
+  filter: brightness(0.97);
+  box-shadow: none;
+}
+
+/* ── Alerts ──────────────────────────────────────────────────── */
+.alert {
+  border-radius: var(--radius-md);
+  font-size: 0.875rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid transparent;
+}
+
+.alert-success {
+  background-color: var(--success-dim);
+  border-color: rgba(0, 212, 170, 0.25);
+  color: var(--accent);
+}
+
+.alert-danger {
+  background-color: var(--danger-dim);
+  border-color: rgba(255, 94, 94, 0.25);
+  color: var(--danger);
+}
+
+.alert .btn-close {
+  filter: invert(1) opacity(0.5);
+}
+
+.alert .btn-close:hover {
+  filter: invert(1) opacity(0.9);
+}
+
+/* ── Cloudflare Turnstile ────────────────────────────────────── */
+.turnstile-wrapper {
+  margin: 1rem 0 0.5rem;
+}
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 576px) {
+  .site-nav {
+    padding: 0 1rem;
+  }
+
+  .page-wrapper {
+    padding: 2.5rem 1rem 4rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .intro-name {
+    font-size: 1.8rem;
+  }
+}
+
+/* ── Bootstrap 5 deep overrides ─────────────────────────────── */
+
+/* Remove Bootstrap's default body bg & color so our vars win */
+body {
+  --bs-body-bg: var(--bg);
+  --bs-body-color: var(--text);
+}
+
+/* Kill Bootstrap's default card styles inside our card */
+.contact-card.card {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+/* Keep Bootstrap grid intact but neutralize white bg container */
+.container {
+  background: transparent;
+}
+
+/* Row spacing inside form */
+.contact-card .row {
+  margin-bottom: 0.15rem;
+}
+
+/* Scrollbar (Webkit) */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted);
+}

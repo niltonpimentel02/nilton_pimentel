@@ -2,95 +2,80 @@
 {% load crispy_forms_filters %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block title %}Contato{% endblock %}
+{% block title %}Contato — Nilton Pimentel{% endblock %}
 {% block content %}
 
-<div class="container">
-    <div class="text-center p-2">
-        <h2>Contato</h2>
+<div class="page-wrapper">
+
+    <!-- ── Intro ──────────────────────────────────────────── -->
+    <div class="intro-section anim-fadein">
+        <h1 class="intro-name">Nilton Pimentel</h1>
+        <p class="intro-role">[ Backend Developer ]</p>
+        <hr class="intro-divider">
+        <p class="intro-tagline">
+            Experiência em backends escaláveis com Python &amp; Django.<br>
+            Contribuidor open source &mdash; brutils, scanapi, django-polymorphic &amp; Cumbuca Dev.
+        </p>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-6">
-            {% if messages %}
-                {% for message in messages %}
-                    {% if 'success' == message.tags %}
-                        <div class="alert alert-success d-flex align-items-center justify-content-center
-                    alert-dismissible fade show" role="alert">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                 class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16"
-                                 role="img" aria-label="Warning:">
-                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477
-                            9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0
-                            1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"></path>
-                            </svg>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            <div>
-                                {{ message }}
-                            </div>
-                        </div>
-                    {% elif 'error' == message.tags %}
-                        <div class="alert alert-danger d-flex align-items-center justify-content-center
-                    alert-dismissible fade show" role="alert">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
-                                 class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16"
-                                 role="img" aria-label="Warning:">
-                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98
-                            1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35
-                            3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0
-                            0 1 0-2z"></path>
-                            </svg>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            <div>
-                                {{ message }}
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+
+    <!-- ── Feedback messages ─────────────────────────────── -->
+    {% if messages %}
+        {% for message in messages %}
+            {% if 'success' == message.tags %}
+                <div class="alert alert-success d-flex align-items-center gap-2 alert-dismissible fade show anim-fadein-delay-1" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" style="flex-shrink:0">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                    </svg>
+                    <div>{{ message }}</div>
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                </div>
+            {% elif 'error' == message.tags %}
+                <div class="alert alert-danger d-flex align-items-center gap-2 alert-dismissible fade show anim-fadein-delay-1" role="alert">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" aria-hidden="true" style="flex-shrink:0">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    <div>{{ message }}</div>
+                    <button type="button" class="btn-close ms-auto" data-bs-dismiss="alert" aria-label="Fechar"></button>
+                </div>
             {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    <!-- ── Contact form ───────────────────────────────────── -->
+    <div class="anim-fadein-delay-1">
+        <div class="section-label">
+            <span class="section-label-text">Contato</span>
+            <span class="section-label-line"></span>
         </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="card col-6">
-            <div class="card-body">
-                <div class="p-2">
-                    <form action="{% url 'core:contact' %}" novalidate method="post" class="form" autocomplete="off">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-md-6">
-                                {{ form.firstname|as_crispy_field }}
-                            </div>
-                            <div class="col-md-6">
-                                {{ form.lastname|as_crispy_field }}
-                            </div>
-                        </div>
-                        <div class="row">
-                            {{ form.email|as_crispy_field }}
-                        </div>
-                        <div class="row">
-                            {{ form.phone|as_crispy_field }}
-                        </div>
-                        <div class="row">
-                            {{ form.subject|as_crispy_field }}
-                        </div>
-                        <div class="row">
-                            {{ form.message|as_crispy_field }}
-                        </div>
-                        <div
+
+        <div class="contact-card card">
+            <form action="{% url 'core:contact' %}" novalidate method="post" autocomplete="off">
+                {% csrf_token %}
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        {{ form.firstname|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{ form.lastname|as_crispy_field }}
+                    </div>
+                </div>
+                {{ form.email|as_crispy_field }}
+                {{ form.phone|as_crispy_field }}
+                {{ form.subject|as_crispy_field }}
+                {{ form.message|as_crispy_field }}
+                <div class="turnstile-wrapper">
+                    <div
                         class="cf-turnstile"
                         data-sitekey="0x4AAAAAAAKRplGW_jz8LtbN"
-{#                        data-sitekey="0x4AAAAAAAKRU9zGyBlgHkk8"#}
-                        data-theme="light"
+                        data-theme="dark"
                         data-language="pt-br"
-                        >
-                        </div>
-                        <button type="submit" class="btn btn-outline-primary">Enviar Mensagem</button>
-                    </form>
+                    ></div>
                 </div>
-            </div>
+                <button type="submit" class="btn-submit">Enviar Mensagem</button>
+            </form>
         </div>
     </div>
+
 </div>
 
 {% endblock %}
