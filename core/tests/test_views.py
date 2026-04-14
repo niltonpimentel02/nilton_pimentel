@@ -1,4 +1,5 @@
 from django.core import mail
+from django.test import override_settings
 from django.urls import reverse
 
 
@@ -36,3 +37,17 @@ def test_contact_form_email_from(client):
 def test_contact_form_status_code_200(client):
     response = client.post(reverse('core:contact'))
     assert response.status_code == 200
+
+
+@override_settings(DEBUG=True)
+def test_contact_page_hides_turnstile_in_debug(client):
+    response = client.get(reverse('core:contact'))
+    assert b'cf-turnstile' not in response.content
+    assert b'challenges.cloudflare.com/turnstile' not in response.content
+
+
+@override_settings(DEBUG=False)
+def test_contact_page_shows_turnstile_outside_debug(client):
+    response = client.get(reverse('core:contact'))
+    assert b'cf-turnstile' in response.content
+    assert b'challenges.cloudflare.com/turnstile' in response.content

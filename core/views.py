@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.conf import settings
 # from django.shortcuts import redirect
 from django.views.generic import FormView, RedirectView
 
@@ -9,6 +10,11 @@ class ContactView(FormView):
     template_name = 'core/contact.html'
     form_class = ContactForm
     success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['debug'] = settings.DEBUG
+        return context
 
     def form_valid(self, form):
         form.send_mail()

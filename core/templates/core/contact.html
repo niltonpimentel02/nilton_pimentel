@@ -63,14 +63,17 @@
                 {{ form.phone|as_crispy_field }}
                 {{ form.subject|as_crispy_field }}
                 {{ form.message|as_crispy_field }}
-                <div class="turnstile-wrapper">
-                    <div
-                        class="cf-turnstile"
-                        data-sitekey="0x4AAAAAAAKRplGW_jz8LtbN"
-                        data-theme="dark"
-                        data-language="pt-br"
-                    ></div>
-                </div>
+                {% if not debug %}
+                    <div class="turnstile-wrapper">
+                        <div
+                            class="cf-turnstile"
+                            data-sitekey="0x4AAAAAAAKRplGW_jz8LtbN"
+                            data-size="flexible"
+                            data-theme="dark"
+                            data-language="pt-br"
+                        ></div>
+                    </div>
+                {% endif %}
                 <button type="submit" class="btn-submit">Enviar Mensagem</button>
             </form>
         </div>

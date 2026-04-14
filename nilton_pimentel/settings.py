@@ -136,18 +136,30 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'static']
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
-# Introduced in Django 4.2
-STORAGES = {
-    'default': {
-        'BACKEND': 'helpers.cloudflare.storages.MediaFileStorage',
-        'OPTIONS': CLOUDFLARE_R2_CONFIG_OPTIONS,
-    },
-    'staticfiles': {
-        'BACKEND': 'helpers.cloudflare.storages.StaticFileStorage',
-        'OPTIONS': CLOUDFLARE_R2_CONFIG_OPTIONS,
-    },
-}
+if DEBUG:
+    STORAGES = {
+        'default': {
+            'BACKEND': 'django.core.files.storage.FileSystemStorage',
+        },
+        'staticfiles': {
+            'BACKEND': 'django.contrib.staticfiles.storage.StaticFilesStorage',
+        },
+    }
+else:
+    # Introduced in Django 4.2
+    STORAGES = {
+        'default': {
+            'BACKEND': 'helpers.cloudflare.storages.MediaFileStorage',
+            'OPTIONS': CLOUDFLARE_R2_CONFIG_OPTIONS,
+        },
+        'staticfiles': {
+            'BACKEND': 'helpers.cloudflare.storages.StaticFileStorage',
+            'OPTIONS': CLOUDFLARE_R2_CONFIG_OPTIONS,
+        },
+    }
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
