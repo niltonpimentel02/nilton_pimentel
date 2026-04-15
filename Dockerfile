@@ -10,29 +10,23 @@ ENV PYTHONUNBUFFERED=1
 # Set working directory
 WORKDIR /app
 
-# Create a new user 'appuser' without a home directory and switch to it
-RUN useradd appuser && chown -R appuser /app
-USER appuser
+# Create a new user to run the app
+RUN useradd --create-home --shell /usr/sbin/nologin appuser
 
-# Copy source code to container
-COPY . .
-
-# Switch back to root to install system and Python dependencies
-USER root
-
-# Install system dependencies and clean up
-RUN apt update -y && \
-    apt upgrade -y && \
-    apt autoremove -y && \
-    apt clean && \
-    rm -rf /var/lib/apt/lists/*
+# Copy requirements first to maximize layer cache reuse
+COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install wheel && \
     pip install --upgrade pip && \
     pip install --no-cache-dir -r requirements.txt
 
-# Switch back to appuser
+# Copy source code after dependencies are installed
+COPY --chown=appuser:appuser . .
+
+# Switch to the unprivileged user
 USER appuser
 
 EXPOSE 8000
+
+CMD ["gunicorn", "nilton_pimentel.wsgi:application", "--bind", ":8000", "--threads", "1", "--timeout", "80", "--workers", "2"]
