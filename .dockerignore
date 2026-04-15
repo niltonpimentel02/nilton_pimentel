@@ -12,6 +12,7 @@
 .sass-cache
 .vagrant/
 __pycache__
+.pytest_cache
 dist
 docs
 .env
@@ -19,6 +20,10 @@ docs
 .pgdata
 .python-version
 stats
+.coverage
+htmlcov
+staticfiles
+media
 Dockerfile
 __localcode/
 docker-compose-local.yml
