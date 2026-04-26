@@ -34,8 +34,8 @@ http:
         servers:
           - url: "http://portainer:9000"
 
-  middlewares:
-    traefik-dashboard-auth:
-      basicAuth:
-        users:
-          - "admin:$apr1$e43WxjEw$pDLr2V0gu/yvBZbx4txGW1"
+  # middlewares:
+  #   traefik-dashboard-auth:
+  #     basicAuth:
+  #       users:
+  #         - '{{ env "TRAEFIK_DASHBOARD_AUTH" }}'
