@@ -93,7 +93,7 @@ jobs:
             cd /opt/projects/nilton_pimentel
             docker pull niltonpimentel/niltonpimentel:latest
             cp config/docker-compose.yml docker-compose.yml
-            cp -r config/traefik traefik
+            cp -r config/traefik/* traefik/
             docker compose up -d --force-recreate traefik app
 
   apply-django-migrations:

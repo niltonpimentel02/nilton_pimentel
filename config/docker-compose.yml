@@ -38,7 +38,7 @@ services:
 
   postgres:
     container_name: postgres
-    image: postgres:latest
+    image: postgres:18
     restart: always
     environment:
       - LC_ALL=C.UTF-8
@@ -48,7 +48,7 @@ services:
     expose:
       - "5432"
     volumes:
-      - ./.pgdata:/var/lib/postgresql/data
+      - ./.pgdata:/var/lib/postgresql
       - /etc/localtime:/etc/localtime:ro
     networks:
       - niltonpimentel-backend
