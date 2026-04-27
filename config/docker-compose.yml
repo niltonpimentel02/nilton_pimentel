@@ -36,6 +36,20 @@ services:
     networks:
       - niltonpimentel-backend
 
+  beszel:
+    image: henrygd/beszel:latest
+    container_name: beszel
+    restart: unless-stopped
+    environment:
+      APP_URL: https://beszel.niltonpimentel.com.br
+    ports:
+      - 8090:8090
+    volumes:
+      - ./beszel_data:/beszel_data
+      - ./beszel_socket:/beszel_socket
+    networks:
+      - niltonpimentel-backend
+
   postgres:
     container_name: postgres
     image: postgres:18
@@ -62,7 +76,7 @@ services:
       - /bin/sh
       - -c
       - |
-        gunicorn nilton_pimentel.wsgi:application --bind :8000 --threads 1 --timeout 80 --workers 2 
+        gunicorn nilton_pimentel.wsgi:application --bind :8000 --threads 1 --timeout 80 --workers 2
     expose:
       - "8000"
     volumes:
