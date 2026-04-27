@@ -23,6 +23,13 @@ http:
       service: portainer-service
       tls: {}
 
+    beszel-https:
+      rule: "Host(`beszel.niltonpimentel.com.br`)"
+      entryPoints:
+        - websecure
+      service: beszel-service
+      tls: {}
+
   services:
     app-service:
       loadBalancer:
@@ -33,6 +40,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://portainer:9000"
+
+    beszel-service:
+      loadBalancer:
+        servers:
+          - url: "http://beszel:8090"
 
   # middlewares:
   #   traefik-dashboard-auth:
