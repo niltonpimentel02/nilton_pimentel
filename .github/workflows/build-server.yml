@@ -80,7 +80,7 @@ jobs:
   restart-docker-containers:
     name: Restart Docker Containers
     runs-on: ubuntu-24.04
-    needs: [push-docker-image-to-docker-hub, create-env-file]
+    needs: [push-docker-image-to-docker-hub, create-env-file, copy-config-files]
     steps:
       - uses: actions/checkout@v6
       - name: Checkout

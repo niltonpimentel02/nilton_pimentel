@@ -17,7 +17,7 @@ https://www.niltonpimentel.com.br/
 6. Execute os testes.
 
 ```console
-git clone git@github.com:niltonpimentel02/nilton_pimentel.git nilton_pimentel
+git clone git@github.com:niltonpimentel02/nilton_pimentel.git
 python -m venv .venv --upgrade-deps
 source .venv/bin/activate
 pip install -r requirements.txt
