@@ -1,5 +1,5 @@
 Django==5.2.13
-psycopg[binary,pool]==3.3.3
+psycopg[binary,pool]==3.3.4
 python-decouple==3.8
 gunicorn==25.3.0
 whitenoise==6.12.0
