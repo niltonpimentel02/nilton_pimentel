@@ -35,6 +35,8 @@ jobs:
           load: true
           tags: |
             niltonpimentel/niltonpimentel:${{ env.SHA }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
       - name: Analyze For Critical And High CVEs
         uses: docker/scout-action@v1
         with:
@@ -51,6 +53,8 @@ jobs:
           push: true
           tags: |
             niltonpimentel/niltonpimentel:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
   create-env-file:
     name: Create Env File
