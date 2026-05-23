@@ -25,7 +25,8 @@ updates:
     commit-message:
       prefix: "[pip] "
     cooldown:
-      default-days: 7
+      # default-days: 7
+      default-days: 3
     directory: "/"
     groups:
       python-dependencies:
@@ -37,7 +38,8 @@ updates:
     labels:
       - "dependabot"
     schedule:
-      interval: "weekly"
-      day: "monday"
+      # interval: "weekly"
+      interval: "daily"
+      # day: "monday"
       time: "12:00"
       timezone: "America/Sao_Paulo"
