@@ -46,6 +46,12 @@ jobs:
           only-fixed: true
           summary: true
           exit-code: true
+      - name: Analyze For All CVEs
+        uses: docker/scout-action@v1
+        with:
+          command: cves
+          image: niltonpimentel/niltonpimentel:${{ env.SHA }}
+          summary: true
       - name: Push To Docker Hub
         uses: docker/build-push-action@v7
         with:
