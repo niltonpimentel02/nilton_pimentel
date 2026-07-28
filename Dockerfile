@@ -29,4 +29,4 @@ USER appuser
 
 EXPOSE 8000
 
-CMD ["gunicorn", "nilton_pimentel.wsgi:application", "--bind", ":8000", "--threads", "1", "--timeout", "80", "--workers", "2"]
+CMD ["gunicorn", "nilton_pimentel.wsgi:application", "--bind", "0.0.0.0:8000", "--worker-class", "gthread", "--workers", "2", "--threads", "2", "--timeout", "80", "--max-requests", "1000", "--max-requests-jitter", "100"]
