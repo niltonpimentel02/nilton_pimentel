@@ -97,6 +97,8 @@ jobs:
             EMAIL_PORT=${{ secrets.EMAIL_PORT }}
             EMAIL_USER=${{ secrets.EMAIL_USER }}
             EMAIL_PASSWORD=${{ secrets.EMAIL_PASSWORD }}
+
+            SENTRY_DSN=${{ secrets.SENTRY_DSN }}
             EOF
 
   copy-config-files:
