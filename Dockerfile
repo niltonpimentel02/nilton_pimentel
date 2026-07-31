@@ -16,10 +16,10 @@ RUN useradd --create-home --shell /usr/sbin/nologin appuser
 # Copy requirements first to maximize layer cache reuse
 COPY requirements.txt .
 
-# Install Python dependencies
-RUN pip install wheel && \
-    pip install --upgrade pip && \
-    pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies, then remove the package installer from the
+# runtime image along with its vendored dependencies.
+RUN python -m pip install --no-cache-dir -r requirements.txt && \
+    python -m pip uninstall --yes pip
 
 # Copy source code after dependencies are installed
 COPY --chown=appuser:appuser . .
