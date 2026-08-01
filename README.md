@@ -20,7 +20,7 @@ https://www.niltonpimentel.com.br/
 git clone git@github.com:niltonpimentel02/nilton_pimentel.git
 python -m venv .venv --upgrade-deps
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements-dev.txt
 cp contrib/env-sample .env
 pytest
 ```
