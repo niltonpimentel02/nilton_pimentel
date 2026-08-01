@@ -1,8 +1,33 @@
-FROM python:3.12-slim
+# syntax=docker/dockerfile:1.7
+
+# Build stage for installing dependencies
+FROM python:3.12-slim AS builder
+
+# Environment variables to prevent Python from writing pyc files to disk
+# and to ensure unbuffered mode for better logging
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# Set working directory
+WORKDIR /app
+
+# Copy requirements first to maximize layer cache reuse
+COPY requirements.txt .
+
+# Cache downloaded packages between BuildKit builds
+RUN --mount=type=cache,target=/root/.cache/pip \
+    python -m pip install \
+        --prefix=/install \
+        --no-warn-script-location \
+        -r requirements.txt
+
+
+# Runtime stage containing only the application and production dependencies
+FROM python:3.12-slim AS runtime
 
 LABEL maintainer="Nilton Pimentel <contato@niltonpimentel.com.br>"
 
-# Environment variables to prevent Python from writing pyc files to disc
+# Environment variables to prevent Python from writing pyc files to disk
 # and to ensure unbuffered mode for better logging
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
@@ -13,13 +38,11 @@ WORKDIR /app
 # Create a new user to run the app
 RUN useradd --create-home --shell /usr/sbin/nologin appuser
 
-# Copy requirements first to maximize layer cache reuse
-COPY requirements.txt .
+# Copy installed dependencies from the builder stage
+COPY --from=builder /install /usr/local/
 
-# Install Python dependencies, then remove the package installer from the
-# runtime image along with its vendored dependencies.
-RUN python -m pip install --no-cache-dir -r requirements.txt && \
-    python -m pip uninstall --yes pip
+# Remove the package installer from the final runtime image
+RUN python -m pip uninstall --yes pip
 
 # Copy source code after dependencies are installed
 COPY --chown=appuser:appuser . .
