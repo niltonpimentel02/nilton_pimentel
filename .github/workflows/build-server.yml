@@ -75,8 +75,9 @@ jobs:
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
             cd /opt/projects/nilton_pimentel
-            sudo rm .env
-            sudo cat << EOF >> .env
+            # sudo rm .env
+            # cat << EOF >> .env
+            sudo tee .env > /dev/null << 'EOF'
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             DEBUG=${{ secrets.DEBUG }}
             ALLOWED_HOSTS=${{ vars.ALLOWED_HOSTS }}
@@ -100,6 +101,8 @@ jobs:
 
             SENTRY_DSN=${{ secrets.SENTRY_DSN }}
             EOF
+
+            sudo chmod 600 .env
 
   copy-config-files:
     name: Copy Config Files
