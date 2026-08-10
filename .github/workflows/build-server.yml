@@ -76,7 +76,7 @@ jobs:
           script: |
             cd /opt/projects/nilton_pimentel
             sudo rm .env
-            cat << EOF >> .env
+            sudo cat << EOF >> .env
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             DEBUG=${{ secrets.DEBUG }}
             ALLOWED_HOSTS=${{ vars.ALLOWED_HOSTS }}
