@@ -117,6 +117,7 @@ jobs:
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           source: "config/*"
           target: "/opt/projects/nilton_pimentel"
+          overwrite: true
 
   restart-docker-containers:
     name: Restart Docker Containers
