@@ -75,7 +75,7 @@ jobs:
           key: ${{ secrets.HOST_PRIVATE_KEY }}
           script: |
             cd /opt/projects/nilton_pimentel
-            rm .env
+            sudo rm .env
             cat << EOF >> .env
             SECRET_KEY=${{ secrets.SECRET_KEY }}
             DEBUG=${{ secrets.DEBUG }}
