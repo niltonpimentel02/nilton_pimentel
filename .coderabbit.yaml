@@ -23,6 +23,6 @@ reviews:
           - Avoid adding comments relating to importing modules.
     - path: "**/tests/**/*.py"
       instructions: |
-        - There is no sensitive information in the test files. All data handled is procedural/generic and non-sensitive.
+        - Inspect test files, including fixtures, for secrets and personal data, and flag any found.
 chat:
   auto_reply: true
