@@ -138,6 +138,21 @@ jobs:
             cp -r config/traefik/* traefik/
             docker compose up -d --force-recreate traefik app
 
+  prune-unused-docker-images:
+    name: Prune Unused Docker Images
+    runs-on: ubuntu-24.04
+    needs: restart-docker-containers
+    steps:
+      - uses: actions/checkout@v7
+      - name: Checkout
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST_IP }}
+          username: ${{ secrets.HOST_USERNAME }}
+          key: ${{ secrets.HOST_PRIVATE_KEY }}
+          script: |
+            docker image prune --all --force
+
   apply-django-migrations:
     name: Apply Django Migrations
     runs-on: ubuntu-24.04
