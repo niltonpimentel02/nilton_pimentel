@@ -29,6 +29,7 @@ jobs:
       CLOUDFLARE_R2_ACCESS_KEY: access-key
       CLOUDFLARE_R2_SECRET_KEY: secret-key
       CLOUDFLARE_R2_BUCKET_ENDPOINT: https://fake-test-bucket.r2.cloudflarestorage.com
+      CLOUDFLARE_TURNSTILE_SECRET_KEY: test-secret
 
       EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
       EMAIL_HOST: smtp.server.com

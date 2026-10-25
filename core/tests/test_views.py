@@ -2,6 +2,21 @@ from django.core import mail
 from django.test import override_settings
 from django.urls import reverse
 
+from core import views
+
+
+def _valid_contact_data():
+    return {
+        'firstname': 'Nilton',
+        'lastname': 'Pimentel',
+        'email': 'email@example.com',
+        'phone': '111111111111111',
+        'subject': 'E-mail Enviado Pelo Site Testig',
+        'message': 'Testing Testing Testing Testing Testing Testing Testing '
+                   'Testing Testing Testing Testing Testing Testing Testing',
+        'cf-turnstile-response': 'test-token',
+    }
+
 
 def test_redirect_home_to_contact_status_code(client):
     response = client.get(reverse('core:home'))
@@ -18,20 +33,44 @@ def test_mail(mailoutbox):
     assert list(m.to) == ['to@example.com']
 
 
-def test_contact_form_email_from(client):
-    data = dict(
-        firstname='Nilton',
-        lastname='Pimentel',
-        email='email@example.com',
-        phone='111111111111111',
-        subject='E-mail Enviado Pelo Site Testig',
-        message='Testing Testing Testing Testing Testing Testing Testing '
-                'Testing Testing Testing Testing Testing Testing Testing'
+@override_settings(DEBUG=False)
+def test_contact_form_email_from(client, mailoutbox, monkeypatch):
+    monkeypatch.setattr(
+        views,
+        'verify_turnstile',
+        lambda token: token == 'test-token',
     )
-    client.post(reverse('core:contact'), data)
-    email = mail.outbox[0]
+    client.post(reverse('core:contact'), _valid_contact_data())
+    email = mailoutbox[0]
     expected = 'contato@niltonpimentel.com.br'
     assert expected == email.from_email
+
+
+@override_settings(DEBUG=False)
+def test_contact_form_does_not_send_email_when_turnstile_fails(
+    client, mailoutbox, monkeypatch
+):
+    monkeypatch.setattr(views, 'verify_turnstile', lambda token: False)
+
+    response = client.post(reverse('core:contact'), _valid_contact_data())
+
+    assert response.status_code == 200
+    assert not mailoutbox
+    assert b'A verifica' in response.content
+
+
+@override_settings(DEBUG=False)
+def test_contact_form_does_not_send_email_without_turnstile_token(
+    client, mailoutbox, monkeypatch
+):
+    monkeypatch.setattr(views, 'verify_turnstile', lambda token: bool(token))
+    data = _valid_contact_data()
+    data.pop('cf-turnstile-response')
+
+    response = client.post(reverse('core:contact'), data)
+
+    assert response.status_code == 200
+    assert not mailoutbox
 
 
 def test_contact_form_status_code_200(client):

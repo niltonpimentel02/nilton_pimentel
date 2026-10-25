@@ -3,6 +3,8 @@ from django.conf import settings
 # from django.shortcuts import redirect
 from django.views.generic import FormView, RedirectView
 
+from helpers.cloudflare.turnstile import verify_turnstile
+
 from .forms import ContactForm
 
 
@@ -17,6 +19,15 @@ class ContactView(FormView):
         return context
 
     def form_valid(self, form):
+        if not settings.DEBUG and not verify_turnstile(
+            self.request.POST.get('cf-turnstile-response')
+        ):
+            messages.error(
+                self.request,
+                'A verificação antispam falhou. Tente novamente.',
+            )
+            return self.render_to_response(self.get_context_data(form=form))
+
         form.send_mail()
         messages.success(self.request, 'E-mail enviado com sucesso!')
         return super().form_valid(form)
