@@ -30,6 +30,11 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
+CLOUDFLARE_TURNSTILE_SECRET_KEY = config(
+    'CLOUDFLARE_TURNSTILE_SECRET_KEY',
+    default='',
+)
+
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='', cast=Csv())
 
 # Application definition
