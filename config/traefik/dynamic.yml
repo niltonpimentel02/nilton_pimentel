@@ -30,6 +30,13 @@ http:
       service: beszel-service
       tls: {}
 
+    uptime-kuma-https:
+      rule: "Host(`status.niltonpimentel.com.br`)"
+      entryPoints:
+        - websecure
+      service: uptime-kuma-service
+      tls: {}
+
   services:
     app-service:
       loadBalancer:
@@ -45,6 +52,11 @@ http:
       loadBalancer:
         servers:
           - url: "http://beszel:8090"
+
+    uptime-kuma-service:
+      loadBalancer:
+        servers:
+          - url: "http://uptime-kuma:3001"
 
   # middlewares:
   #   traefik-dashboard-auth:

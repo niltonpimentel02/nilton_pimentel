@@ -27,8 +27,6 @@ services:
     container_name: portainer
     image: portainer/portainer-ce:lts
     restart: always
-    ports:
-      - 9000:9000
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /etc/localtime:/etc/localtime:ro
@@ -42,11 +40,20 @@ services:
     restart: unless-stopped
     environment:
       APP_URL: https://beszel.niltonpimentel.com.br
-    ports:
-      - 8090:8090
     volumes:
       - ./beszel_data:/beszel_data
       - ./beszel_socket:/beszel_socket
+      - /etc/localtime:/etc/localtime:ro
+    networks:
+      - niltonpimentel-backend
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    restart: unless-stopped
+    volumes:
+      - ./uptime_kuma_data:/app/data
+      - /etc/localtime:/etc/localtime:ro
     networks:
       - niltonpimentel-backend
 
