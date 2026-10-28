@@ -31,7 +31,7 @@ http:
       tls: {}
 
     uptime-kuma-https:
-      rule: "Host(`status.niltonpimentel.com.br`)"
+      rule: "Host(`uptime-kuma.niltonpimentel.com.br`)"
       entryPoints:
         - websecure
       service: uptime-kuma-service

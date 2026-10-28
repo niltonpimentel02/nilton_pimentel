@@ -40,6 +40,8 @@ services:
     restart: unless-stopped
     environment:
       APP_URL: https://beszel.niltonpimentel.com.br
+    ports:
+      - 8090:8090
     volumes:
       - ./beszel_data:/beszel_data
       - ./beszel_socket:/beszel_socket
@@ -48,7 +50,7 @@ services:
       - niltonpimentel-backend
 
   uptime-kuma:
-    image: louislam/uptime-kuma:latest
+    image: louislam/uptime-kuma:2
     container_name: uptime-kuma
     restart: unless-stopped
     volumes:
