@@ -205,15 +205,22 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 if not DEBUG:
+    import logging
     import sentry_sdk
+    from sentry_sdk.integrations.logging import LoggingIntegration
 
     sentry_sdk.init(
         dsn=config("SENTRY_DSN", default=""),
         # Add data like request headers and IP for users,
         # see https://docs.sentry.io/platforms/python/data-management/data-collected/ for more info
-        send_default_pii=True,
-        # Enable sending logs to Sentry
-        enable_logs=True,
+        data_collection={
+            "user_info": True,
+            # SDK 3 no longer scrubs request bodies and stack variables by default.
+            "http_bodies": [],
+            "database_query_data": False,
+            "stack_frame_variables": False,
+        },
+        integrations=[LoggingIntegration(event_level=logging.ERROR)],
         # Set traces_sample_rate to 1.0 to capture 100%
         # of transactions for tracing.
         traces_sample_rate=1.0,
